@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# IDE and local settings
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Build products and local evidence
+*.axf
+*.bin
+*.elf
+*.exe
+*.o
+*.d
+*.dep
+*.map
+*.lnp
+*.htm
+*.log
+firmware/Output/
+firmware/DebugConfig/
+evidence/
+
+# Local/private release material intentionally excluded from the public repo
+docs/linux_migration.md
+*.env
+*.local

@@ -1,0 +1,59 @@
+{
+  "model": "best.onnx",
+  "source_pt": "host_app/models/best.pt",
+  "source_sha256": "45441dd9ff094e879fafe2b43635badb81bfc8b589e93d44a87ef3244fb19f4e",
+  "target_sha256": "4162d9e3421ded767a7e329cad0430501074b825f11fdb98d455f9924805c8a9",
+  "target_size_bytes": 44669136,
+  "export_command": "python deployment/export_model.py",
+  "export_env": {
+    "platform": "Windows / Python 3.13.0",
+    "ultralytics": "8.3.97",
+    "torch": "2.6.0+cu124",
+    "onnx": "1.22.0",
+    "onnxsim": "0.7.0",
+    "onnxruntime": "1.28.0",
+    "install_command": "pip install -i https://pypi.org/simple onnx onnxruntime onnxsim (清华源 403 失败后改官方源)"
+  },
+  "input": {
+    "name": "images",
+    "shape": [1, 3, 640, 640],
+    "dtype": "float32",
+    "layout": "NCHW"
+  },
+  "output": {
+    "name": "output0",
+    "shape": [1, 8, 8400],
+    "dtype": "float32"
+  },
+  "graph": {
+    "opset": 12,
+    "ir_version": 7,
+    "simplify": "onnxsim(0.7.0) 由 export_model.py 脚本内固化执行(ultralytics simplify=False 导出后脚本内 onnxsim.simplify + onnx.checker 校验)",
+    "num_nodes": 234
+  },
+  "classes": ["closed_eye", "closed_mouth", "open_eye", "open_mouth"],
+  "preprocess": {
+    "color": "BGR -> RGB",
+    "letterbox": "LetterBox(new_shape=640, center=True, stride=32, auto=False, pad_value=114)",
+    "normalize": "/255.0",
+    "layout": "NCHW"
+  },
+  "inference": {
+    "conf_thres": 0.25,
+    "iou_thres": 0.45,
+    "nms_location": "host_side_postprocess: ONNX 仅含网络前向(输出 [1,8,8400] 原始张量)，解码与 NMS 由消费端执行，复用 ultralytics.utils.ops.non_max_suppression",
+    "max_det": 300
+  },
+  "validation_samples": {
+    "manifest_file": "deployment/models/samples.json",
+    "manifest_sha256": "fd2d5d944418fd279475b3bdbb1ca4ab780b8861e995a3f0978b14ac31a1d536",
+    "count": 9,
+    "note": "固定验证集清单独立文件(含每样本 SHA-256 与不同原始分辨率样本)，PT/ONNX 等价测试从此清单加载，禁止两端使用不同样本"
+  },
+  "ort": {
+    "exported_runtime_provider": "CPUExecutionProvider",
+    "available_providers": ["AzureExecutionProvider", "CPUExecutionProvider"],
+    "available_providers_measured_on": "Windows / onnxruntime 1.28.0 (A5 实测, R1 复核一致)",
+    "target_platform": "Linux 边缘(CPU)"
+  }
+}

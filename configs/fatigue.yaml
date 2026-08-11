@@ -1,0 +1,16 @@
+# 疲劳状态机初始标定参数(唯一真源)
+# 依据:项目文档/多智能体协同规划/共享基线.md 第 5 节
+# 所有时长单位:秒;必须使用 time.monotonic() 或可注入的单调时钟累计,不得按帧数累计。
+# 变更必须保留测试证据并重新经过 G2 审查。
+
+closed_eye_trigger: 1.5        # 连续闭眼达到该时长进入 FATIGUE
+eye_missing_grace: 0.5         # 容忍短暂眼部漏检
+fatigue_recovery: 0.5          # 已疲劳后持续睁眼达到该时长才恢复
+open_mouth_trigger: 1.0        # 连续张嘴达到该时长产生 YAWN
+mouth_missing_grace: 0.3       # 容忍短暂嘴部漏检
+yawn_min_hold: 1.0             # YAWN 触发后至少保持该时长,保证 2 Hz 心跳可观测
+yawn_rearm_closed_mouth: 0.3   # 持续可靠闭嘴达到该时长后允许下一次 YAWN
+yawn_fallback_open_eye: 0.3    # YAWN 内仅可靠睁眼+无可靠张嘴持续此时长等价于闭嘴恢复(闭口漏检兜底)
+unknown_timeout: 1.0           # 无可靠目标达到该时长进入 UNKNOWN
+result_stale_timeout: 1.5      # 最新推理结果超过该时长即视为主机检测故障(主机层使用)
+evidence_confidence_min: 0.50  # 进入时序逻辑的检测置信度下限

@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "purpose": "G6-01 fixed validation samples for PT/ONNX equivalence tests",
+  "nms": {
+    "conf_thres": 0.25,
+    "iou_thres": 0.45,
+    "max_det": 300
+  },
+  "preprocess": "LetterBox((640,640),auto=False,stride=32)+BGR->RGB+/255+NCHW",
+  "count": 9,
+  "samples": [
+    {
+      "file": "413_jpg.rf.fd3c3fbf4252e9c525d78b12fde41dec.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "242ea2f3d16c39566f1a4dcd3303ae91de147a93b98a5dcd4590ebec79cc666e"
+    },
+    {
+      "file": "414_jpg.rf.f09ba099c4a87de29a91a2c78fdb2ecf.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "11db9cfa8df6ee2b37e5e7a8b84e81072a14903e3c1966a13e2dcef7f971a379"
+    },
+    {
+      "file": "SGA2100001S0001IMG0005_jpg.rf.39a484b16680b7f73db5400ccbdbc340.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "3d30e393e4d26f4004339608e3e41343e62fdd7c5a9270e929215c7e5fb92023"
+    },
+    {
+      "file": "SGA2100001S0005IMG0002_jpg.rf.4e3d0ff6f9532705adca3577595e0054.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "582c6929c2d01c9a036dabfd2363cacdc29d17ad175c60fdee3d333af444cb3f"
+    },
+    {
+      "file": "SGA2100169S0017IMG0002_jpg.rf.22cf361dd8a19ec41c0806d1f4e5032b.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "5648b53dd79bcbfe73877d9b47b434fb88f8c40e2ea32186ed4d79cc2f7fb0b7"
+    },
+    {
+      "file": "SGA2101132S0010IMG0002_jpg.rf.993fec6440c35a51dedb6a531a919072.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "6c86b50adc39474a6ae3f91a524451c3d5997144a6268db9a720be3c547b5696"
+    },
+    {
+      "file": "101_jpg.rf.3024243c7c45563a77cf434d2b639999.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "9e2602d9c5182857df15f08a00c39dcb11290a3979186c0c530e8e2c08b9af51"
+    },
+    {
+      "file": "103_jpg.rf.1ea474a122f5a9f05ca74c0d2a16ec36.jpg",
+      "dir": "pilao/test/images",
+      "sha256": "6fcdb559934670c0d01e639395070e9f5046e6d53408888bda7edd7711208657"
+    },
+    {
+      "file": "resized_1280x960_open_mouth.jpg",
+      "dir": "deployment/models/samples",
+      "sha256": "b30f3c4bcb385292533c84622e7bdd81836381e44181ba0a11cd009b19d55558",
+      "note": "不同原始分辨率 1280x960，由 103_... 线性插值生成（含 open_mouth）"
+    }
+  ]
+}
